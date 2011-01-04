@@ -9,7 +9,6 @@ import java.util.Map;
 import javax.xml.rpc.ServiceException;
 
 import org.sappho.jira.rpc.soap.common.FieldChange;
-import org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoap;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -21,8 +20,8 @@ public class SapphoJiraRpcSoapServiceWrapper {
     public SapphoJiraRpcSoapServiceWrapper(String url, String username, String password) throws MalformedURLException,
             ServiceException, RemoteException {
 
-        service = new SapphoJiraRpcSoapServiceLocator().getSapphoRpcSoapV1(new URL(url
-                + "/rpc/soap/sappho-rpc-soap-v1"));
+        service = new SapphoJiraRpcSoapServiceLocator()
+                .getSapphoRpcSoapV1(new URL(url + "/rpc/soap/sappho-rpc-soap-v1"));
         token = service.login(username, password);
     }
 
