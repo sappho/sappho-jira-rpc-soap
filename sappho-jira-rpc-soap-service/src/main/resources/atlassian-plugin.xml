@@ -1,0 +1,19 @@
+<atlassian-plugin key="sappho.jira.rpc.soap"
+	name="Sappho Jira SOAP Services Plugin">
+	<plugin-info>
+		<description key="sappho.jira.rpc.soap.desc">Sappho Jira SOAP Services Plugin</description>
+		<version>4.2.0.0</version>
+		<application-version min="4.0" max="4.2" />
+		<vendor name="Sappho" url="http://www.sappho.org.uk/" />
+	</plugin-info>
+	<component system="true" key="sappho.jira.rpc.soap.component"
+		name="Sappho Jira SOAP Services Plugin Component" class="org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoapImpl">
+		<interface>org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoap</interface>
+	</component>
+	<rpc-soap key="sappho.jira.rpc.soap.impl" name="Sappho Jira SOAP Services Plugin Implementation"
+		class="org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoapImpl">
+		<description>Sappho Jira SOAP Services Plugin Implementation</description>
+		<service-path>sappho-rpc-soap-v1</service-path>
+		<published-interface>org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoap</published-interface>
+	</rpc-soap>
+</atlassian-plugin>

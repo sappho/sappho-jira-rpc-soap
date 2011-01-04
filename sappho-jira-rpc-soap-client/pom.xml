@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>sappho-jira-rpc-soap</artifactId>
+		<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sappho-jira-rpc-soap-client</artifactId>
+	<name>sappho-jira-rpc-soap-client</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+			<artifactId>sappho-jira-rpc-soap-service</artifactId>
+			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.atlassian.jira.plugins</groupId>
+					<artifactId>atlassian-jira-rpc-plugin</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.atlassian.jira</groupId>
+					<artifactId>atlassian-jira</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis</artifactId>
+			<version>1.3-atlassian-1</version>
+		</dependency>
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis-jaxrpc</artifactId>
+			<version>1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis-saaj</artifactId>
+			<version>1.3</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<id>unpack-wsdl</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+									<artifactId>sappho-jira-rpc-soap-service</artifactId>
+									<includes>**/*.wsdl</includes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>axistools-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>wsdl2java</id>
+						<phase>process-sources</phase>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${project.build.directory}/dependency</sourceDirectory>
+							<wsdlFiles>
+								<wsdlFile>sappho-rpc-soap-v1.wsdl</wsdlFile>
+							</wsdlFiles>
+							<packageSpace>org.sappho.jira.rpc.soap.client</packageSpace>
+							<outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
