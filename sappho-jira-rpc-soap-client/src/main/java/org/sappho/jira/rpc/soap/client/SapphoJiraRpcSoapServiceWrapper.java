@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.xml.rpc.ServiceException;
 
 import org.sappho.jira.rpc.soap.common.FieldChange;
+import org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoap;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -21,7 +22,7 @@ public class SapphoJiraRpcSoapServiceWrapper {
             ServiceException, RemoteException {
 
         service = new SapphoJiraRpcSoapServiceLocator().getSapphoRpcSoapV1(new URL(url
-                + "/rpc/soap/sappho-getparent-v1"));
+                + "/rpc/soap/sappho-rpc-soap-v1"));
         token = service.login(username, password);
     }
 
