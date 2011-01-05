@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -16,17 +15,76 @@
 	<packaging>pom</packaging>
 	<name>sappho-jira-rpc-soap</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.3.1</version>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+				<artifactId>sappho-jira-rpc-soap-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+				<artifactId>sappho-jira-rpc-soap-service</artifactId>
+				<version>${project.version}</version>
+				<scope>optional</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.thoughtworks.xstream</groupId>
+				<artifactId>xstream</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>axis</groupId>
+				<artifactId>axis</artifactId>
+				<version>1.3-atlassian-1</version>
+			</dependency>
+			<dependency>
+				<groupId>axis</groupId>
+				<artifactId>axis-jaxrpc</artifactId>
+				<version>1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>axis</groupId>
+				<artifactId>axis-saaj</artifactId>
+				<version>1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>com.atlassian.jira.plugins</groupId>
+				<artifactId>atlassian-jira-rpc-plugin</artifactId>
+				<version>4.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.atlassian.jira</groupId>
+				<artifactId>atlassian-jira</artifactId>
+				<version>4.2</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<artifactId>jta</artifactId>
+						<groupId>jta</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>jndi</artifactId>
+						<groupId>jndi</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>log4j</artifactId>
+						<groupId>log4j</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>axistools-maven-plugin</artifactId>
@@ -51,6 +109,7 @@
 	<modules>
 		<module>sappho-jira-rpc-soap-service</module>
 		<module>sappho-jira-rpc-soap-client</module>
+		<module>sappho-jira-rpc-soap-common</module>
 	</modules>
 
 </project>

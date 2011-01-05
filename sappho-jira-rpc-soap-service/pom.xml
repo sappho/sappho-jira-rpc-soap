@@ -15,34 +15,33 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+			<artifactId>sappho-jira-rpc-soap-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.atlassian.jira.plugins</groupId>
 			<artifactId>atlassian-jira-rpc-plugin</artifactId>
-			<version>4.2</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.atlassian.jira</groupId>
 			<artifactId>atlassian-jira</artifactId>
-			<version>4.2</version>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>jta</artifactId>
-					<groupId>jta</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>jndi</artifactId>
-					<groupId>jndi</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>log4j</artifactId>
-					<groupId>log4j</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${project.build.directory}/lib</directory>
+				<targetPath>META-INF/lib</targetPath>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -59,6 +58,33 @@
 							<classOfPortType>org.sappho.jira.rpc.soap.service.SapphoJiraRpcSoap</classOfPortType>
 							<location>http://localhost/rpc/soap/sappho-rpc-soap-v1</location>
 							<outputDirectory>${project.build.directory}/classes</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>uk.org.sappho.jira.rpc.soap</groupId>
+									<artifactId>sappho-jira-rpc-soap-common</artifactId>
+									<outputDirectory>${project.build.directory}/lib</outputDirectory>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.thoughtworks.xstream</groupId>
+									<artifactId>xstream</artifactId>
+									<outputDirectory>${project.build.directory}/lib</outputDirectory>
+								</artifactItem>
+							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
