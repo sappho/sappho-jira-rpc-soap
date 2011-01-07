@@ -68,7 +68,7 @@ public class SapphoJiraRpcSoapImpl implements SapphoJiraRpcSoap {
             List<ChangeItemBean> changes = changeHistoryManager.getChangeItemsForField(issue, fieldName);
             for (ChangeItemBean change : changes) {
                 calendar.setTimeInMillis(change.getCreated().getTime());
-                fieldChanges.add(new FieldChange(calendar.getTime(), change.getFromString(), change.getToString()));
+                fieldChanges.add(new FieldChange(calendar.getTime(), change.getFrom(), change.getTo()));
             }
         }
         return new XStream().toXML(history);
