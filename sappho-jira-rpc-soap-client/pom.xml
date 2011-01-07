@@ -19,10 +19,6 @@
 			<artifactId>sappho-jira-rpc-soap-common</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>uk.org.sappho.jira.rpc.soap</groupId>
-			<artifactId>sappho-jira-rpc-soap-service</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 		</dependency>
@@ -57,6 +53,7 @@
 								<artifactItem>
 									<groupId>uk.org.sappho.jira.rpc.soap</groupId>
 									<artifactId>sappho-jira-rpc-soap-service</artifactId>
+									<version>${project.version}</version>
 									<includes>**/*.wsdl</includes>
 								</artifactItem>
 							</artifactItems>
